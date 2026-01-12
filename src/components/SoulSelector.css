@@ -1,0 +1,70 @@
+.soul-selector {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.soul-selector__title {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.soul-selector__grid {
+  display: grid;
+  gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .soul-selector__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .soul-selector__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.soul-selector__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: #f5f5f5;
+  border-radius: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.soul-selector__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.soul-selector__checkbox input {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+}
+
+.soul-selector__name {
+  font-weight: 500;
+}
+
+.soul-selector__evolution {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  background: white;
+  font-size: 0.875rem;
+}
+
+.soul-selector__principles {
+  font-size: 0.75rem;
+  color: #666;
+  flex-basis: 100%;
+  margin-top: 0.25rem;
+}
