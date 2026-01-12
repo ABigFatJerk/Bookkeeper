@@ -1,5 +1,5 @@
 import { PRINCIPLES, Principle } from '../data/principles';
-import { SOULS } from '../data/souls';
+import { SOULS, getSoulPrinciples } from '../data/souls';
 import { SKILLS } from '../data/skills';
 import { PlayerState, PrincipleTotals } from '../types';
 
@@ -12,15 +12,14 @@ export function calculatePrincipleTotals(state: PlayerState): PrincipleTotals {
 
   // Add soul contributions
   for (const playerSoul of state.souls) {
-    if (!playerSoul.owned) continue;
+    if (!playerSoul.owned || playerSoul.evolution < 0) continue;
 
     const soulDef = SOULS.find((s) => s.id === playerSoul.id);
     if (!soulDef) continue;
 
-    // Each principle in the soul gets: base_value + evolution_level
-    for (const [principle, baseValue] of Object.entries(soulDef.principles)) {
-      const p = principle as Principle;
-      totals[p] += baseValue + playerSoul.evolution;
+    const principles = getSoulPrinciples(soulDef, playerSoul.evolution);
+    for (const [principle, value] of Object.entries(principles)) {
+      totals[principle as Principle] += value;
     }
   }
 

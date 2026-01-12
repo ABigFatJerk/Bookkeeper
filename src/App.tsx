@@ -16,7 +16,7 @@ function createInitialState(): PlayerState {
     souls: SOULS.map((soul) => ({
       id: soul.id,
       owned: false,
-      evolution: 0,
+      evolution: -1,
     })),
     skills: SKILLS.map((skill) => ({
       id: skill.id,

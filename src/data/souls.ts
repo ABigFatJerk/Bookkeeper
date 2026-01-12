@@ -4,7 +4,9 @@ export interface SoulDefinition {
   id: string;
   name: string;
   description: string;
-  principles: Partial<Record<Principle, number>>;
+  primary: Principle;
+  secondary: Principle | null;
+  isHealth?: boolean; // Health has special evolution rules
 }
 
 export const SOULS: SoulDefinition[] = [
@@ -12,61 +14,97 @@ export const SOULS: SoulDefinition[] = [
     id: 'chor',
     name: 'Chor',
     description: 'Exuberance, instinct, rhythm',
-    principles: { Heart: 2, Grail: 1 },
+    primary: 'Heart',
+    secondary: 'Grail',
   },
   {
     id: 'ereb',
     name: 'Ereb',
     description: 'Pride, compassion, hatred and fear',
-    principles: { Grail: 2, Edge: 1 },
+    primary: 'Grail',
+    secondary: 'Edge',
   },
   {
     id: 'fet',
     name: 'Fet',
     description: 'That part of us which walks in dreams',
-    principles: { Rose: 2, Moth: 1 },
+    primary: 'Rose',
+    secondary: 'Moth',
   },
   {
     id: 'health',
     name: 'Health',
     description: 'The dwelling-place of the soul',
-    principles: { Heart: 1, Nectar: 1, Scale: 1 },
+    primary: 'Heart',
+    secondary: null,
+    isHealth: true,
   },
   {
     id: 'mettle',
     name: 'Mettle',
     description: 'Will; self-discipline; that part which makes the right choice',
-    principles: { Forge: 2, Edge: 1 },
+    primary: 'Forge',
+    secondary: 'Edge',
   },
   {
     id: 'phost',
     name: 'Phost',
     description: 'Sight, perception, inspiration',
-    principles: { Lantern: 2, Sky: 1 },
+    primary: 'Lantern',
+    secondary: 'Sky',
   },
   {
     id: 'shapt',
     name: 'Shapt',
     description: 'Eloquence and understanding; the door opens both ways',
-    principles: { Knock: 2, Forge: 1 },
+    primary: 'Knock',
+    secondary: 'Forge',
   },
   {
     id: 'trist',
     name: 'Trist',
     description: 'The change and the longing',
-    principles: { Moth: 2, Moon: 1 },
+    primary: 'Moth',
+    secondary: 'Moon',
   },
   {
     id: 'wist',
     name: 'Wist',
     description: 'Name, memory, that part which remains',
-    principles: { Winter: 2, Lantern: 1 },
+    primary: 'Winter',
+    secondary: 'Lantern',
   },
 ];
 
-export const EVOLUTION_LEVELS = [
-  { value: 0, label: 'Base' },
-  { value: 1, label: '+' },
-  { value: 2, label: '++' },
-  { value: 3, label: '+++' },
-] as const;
+// Get principle values for a soul at a given evolution level
+// Evolution: -1 = None, 0 = Base, 1 = +, 2 = ++, 3 = +++
+export function getSoulPrinciples(
+  soul: SoulDefinition,
+  evolution: number
+): Record<string, number> {
+  if (evolution < 0) {
+    return {}; // Not owned
+  }
+
+  if (soul.isHealth) {
+    // Health has special progression: Heart/Nectar increase each level, Scale increases at ++ and +++
+    const heart = 1 + evolution;
+    const nectar = 1 + evolution;
+    const scale = evolution >= 2 ? evolution : 1;
+    return { Heart: heart, Nectar: nectar, Scale: scale };
+  }
+
+  // Standard souls: Primary starts at 2, Secondary starts at 1, both +1 per evolution
+  const primaryValue = 2 + evolution;
+  const secondaryValue = 1 + evolution;
+
+  const result: Record<string, number> = {
+    [soul.primary]: primaryValue,
+  };
+
+  if (soul.secondary) {
+    result[soul.secondary] = secondaryValue;
+  }
+
+  return result;
+}
