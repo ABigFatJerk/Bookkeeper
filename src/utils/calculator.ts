@@ -30,10 +30,10 @@ export function calculatePrincipleTotals(state: PlayerState): PrincipleTotals {
     const skillDef = SKILLS.find((s) => s.id === playerSkill.id);
     if (!skillDef) continue;
 
-    // Primary principle: +1 (fixed)
-    totals[skillDef.primary] += 1;
+    // Primary principle: level + 1
+    totals[skillDef.primary] += playerSkill.level + 1;
 
-    // Secondary principle: +skill level
+    // Secondary principle: level
     totals[skillDef.secondary] += playerSkill.level;
   }
 
