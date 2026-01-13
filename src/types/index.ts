@@ -16,13 +16,18 @@ export interface PlayerSkill {
 // Bonus values for tools, inks, and memories
 export type PrincipleBonuses = Partial<Record<Principle, number>>;
 
+// Notes for memories
+export type PrincipleNotes = Partial<Record<Principle, string>>;
+
 // Complete player state
 export interface PlayerState {
   souls: PlayerSoul[];
   skills: PlayerSkill[];
   toolBonuses: PrincipleBonuses;
+  toolNotes: PrincipleNotes;
   inkBonuses: PrincipleBonuses;
   memoryBonuses: PrincipleBonuses;
+  memoryNotes: PrincipleNotes;
 }
 
 // Calculated principle totals

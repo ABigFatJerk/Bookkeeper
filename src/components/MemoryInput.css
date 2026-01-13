@@ -1,0 +1,81 @@
+.memory-input {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.memory-input__title {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.memory-input__grid {
+  display: grid;
+  gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .memory-input__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .memory-input__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.memory-input__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  background: #f5f5f5;
+  border-radius: 0.25rem;
+}
+
+.memory-input__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.memory-input__label {
+  font-weight: 500;
+}
+
+.memory-input__value {
+  width: 3rem;
+  padding: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.memory-input__value:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+.memory-input__note {
+  width: 100%;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.memory-input__note:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+.memory-input__note::placeholder {
+  color: #aaa;
+}
