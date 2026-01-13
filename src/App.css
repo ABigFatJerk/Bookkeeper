@@ -69,7 +69,7 @@
 
 @media (min-width: 1024px) {
   .app__main {
-    grid-template-columns: 350px 1fr;
+    grid-template-columns: 175px 1fr;
   }
 }
 
