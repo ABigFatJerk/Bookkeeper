@@ -37,18 +37,11 @@ export function calculatePrincipleTotals(state: PlayerState): PrincipleTotals {
     totals[skillDef.secondary] += playerSkill.level;
   }
 
-  // Add tool bonuses
-  for (const [principle, value] of Object.entries(state.toolBonuses)) {
-    if (value && value > 0) {
-      totals[principle as Principle] += value;
-    }
-  }
-
-  // Add ink bonuses
-  for (const [principle, value] of Object.entries(state.inkBonuses)) {
-    if (value && value > 0) {
-      totals[principle as Principle] += value;
-    }
+  // Add tool or ink bonuses (use greater of the two, not both)
+  for (const principle of PRINCIPLES) {
+    const toolValue = state.toolBonuses[principle] ?? 0;
+    const inkValue = state.inkBonuses[principle] ?? 0;
+    totals[principle] += Math.max(toolValue, inkValue);
   }
 
   // Add memory bonuses
