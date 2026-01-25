@@ -1,8 +1,8 @@
 .soul-selector {
-  background: white;
+  background: var(--color-card);
   border-radius: 0.5rem;
   padding: 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px var(--color-shadow);
 }
 
 .soul-selector__title {
@@ -32,7 +32,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem;
-  background: #f5f5f5;
+  background: var(--color-card-secondary);
   border-radius: 0.25rem;
   flex-wrap: wrap;
 }
@@ -50,9 +50,10 @@
 .soul-selector__btn {
   width: 1.5rem;
   height: 1.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 0.25rem;
-  background: white;
+  background: var(--color-card);
+  color: var(--color-text);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -63,7 +64,7 @@
 }
 
 .soul-selector__btn:hover:not(:disabled) {
-  background: #e0e0e0;
+  background: var(--color-card-secondary-hover);
 }
 
 .soul-selector__btn:disabled {
@@ -80,7 +81,7 @@
 
 .soul-selector__principles {
   font-size: 0.75rem;
-  color: #666;
+  color: var(--color-text-secondary);
   flex-basis: 100%;
   margin-top: 0.25rem;
 }

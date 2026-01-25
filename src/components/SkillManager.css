@@ -1,8 +1,8 @@
 .skill-manager {
-  background: white;
+  background: var(--color-card);
   border-radius: 0.5rem;
   padding: 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px var(--color-shadow);
 }
 
 .skill-manager__title {
@@ -19,15 +19,17 @@
   width: 100%;
   padding: 0.5rem;
   padding-right: 2rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 0.25rem;
   font-size: 0.875rem;
   box-sizing: border-box;
+  background: var(--color-card);
+  color: var(--color-text);
 }
 
 .skill-manager__filter:focus {
   outline: none;
-  border-color: #666;
+  border-color: var(--color-focus);
 }
 
 .skill-manager__filter-clear {
@@ -40,7 +42,7 @@
   border: none;
   background: transparent;
   font-size: 1.25rem;
-  color: #666;
+  color: var(--color-text-secondary);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -49,7 +51,7 @@
 }
 
 .skill-manager__filter-clear:hover {
-  color: #333;
+  color: var(--color-text);
 }
 
 .skill-manager__list {
@@ -65,12 +67,12 @@
   justify-content: space-between;
   gap: 0.5rem;
   padding: 0.5rem;
-  background: #f5f5f5;
+  background: var(--color-card-secondary);
   border-radius: 0.25rem;
 }
 
 .skill-manager__item:hover {
-  background: #eeeeee;
+  background: var(--color-card-secondary-hover);
 }
 
 .skill-manager__info {
@@ -90,7 +92,7 @@
 
 .skill-manager__principles {
   font-size: 0.7rem;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .skill-manager__controls {
@@ -103,9 +105,10 @@
 .skill-manager__btn {
   width: 1.5rem;
   height: 1.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 0.25rem;
-  background: white;
+  background: var(--color-card);
+  color: var(--color-text);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -116,7 +119,7 @@
 }
 
 .skill-manager__btn:hover:not(:disabled) {
-  background: #e0e0e0;
+  background: var(--color-card-secondary-hover);
 }
 
 .skill-manager__btn:disabled {
