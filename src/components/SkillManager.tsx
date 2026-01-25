@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { SKILLS } from '../data/skills';
 import { PlayerSkill } from '../types';
 import './SkillManager.css';
@@ -8,17 +9,40 @@ interface SkillManagerProps {
 }
 
 export function SkillManager({ skills, onChange }: SkillManagerProps) {
+  const [filter, setFilter] = useState('');
+
   const handleLevelChange = (id: string, level: number) => {
     onChange(
       skills.map((skill) => (skill.id === id ? { ...skill, level } : skill))
     );
   };
 
+  const filteredSkills = SKILLS.filter((skill) =>
+    skill.name.toLowerCase().includes(filter.toLowerCase())
+  );
+
   return (
     <div className="skill-manager">
       <h2 className="skill-manager__title">Skills</h2>
+      <div className="skill-manager__filter-container">
+        <input
+          type="text"
+          className="skill-manager__filter"
+          placeholder="Filter skills..."
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        />
+        {filter && (
+          <button
+            className="skill-manager__filter-clear"
+            onClick={() => setFilter('')}
+          >
+            ×
+          </button>
+        )}
+      </div>
       <div className="skill-manager__list">
-        {SKILLS.map((skillDef) => {
+        {filteredSkills.map((skillDef) => {
           const playerSkill = skills.find((s) => s.id === skillDef.id);
           const level = playerSkill?.level ?? 0;
 

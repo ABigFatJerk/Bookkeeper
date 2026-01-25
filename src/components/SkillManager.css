@@ -10,6 +10,48 @@
   margin-bottom: 0.75rem;
 }
 
+.skill-manager__filter-container {
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+.skill-manager__filter {
+  width: 100%;
+  padding: 0.5rem;
+  padding-right: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  box-sizing: border-box;
+}
+
+.skill-manager__filter:focus {
+  outline: none;
+  border-color: #666;
+}
+
+.skill-manager__filter-clear {
+  position: absolute;
+  right: 0.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  background: transparent;
+  font-size: 1.25rem;
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.skill-manager__filter-clear:hover {
+  color: #333;
+}
+
 .skill-manager__list {
   display: grid;
   gap: 0.25rem;
