@@ -10,45 +10,53 @@ export function calculatePrincipleTotals(state: PlayerState): PrincipleTotals {
     totals[principle] = 0;
   }
 
-  // Add soul contributions
-  for (const playerSoul of state.souls) {
-    if (!playerSoul.owned || playerSoul.evolution < 0) continue;
-
-    const soulDef = SOULS.find((s) => s.id === playerSoul.id);
-    if (!soulDef) continue;
-
-    const principles = getSoulPrinciples(soulDef, playerSoul.evolution);
-    for (const [principle, value] of Object.entries(principles)) {
-      totals[principle as Principle] += value;
+  // For each principle, find the best single soul contribution
+  for (const principle of PRINCIPLES) {
+    let bestSoulValue = 0;
+    for (const playerSoul of state.souls) {
+      if (!playerSoul.owned || playerSoul.evolution < 0) continue;
+      const soulDef = SOULS.find((s) => s.id === playerSoul.id);
+      if (!soulDef) continue;
+      const principles = getSoulPrinciples(soulDef, playerSoul.evolution);
+      const value = principles[principle] ?? 0;
+      if (value > bestSoulValue) {
+        bestSoulValue = value;
+      }
     }
+    totals[principle] += bestSoulValue;
   }
 
-  // Add skill contributions
-  for (const playerSkill of state.skills) {
-    if (playerSkill.level <= 0) continue;
-
-    const skillDef = SKILLS.find((s) => s.id === playerSkill.id);
-    if (!skillDef) continue;
-
-    // Primary principle: level + 1
-    totals[skillDef.primary] += playerSkill.level + 1;
-
-    // Secondary principle: level
-    totals[skillDef.secondary] += playerSkill.level;
+  // For each principle, find the best single skill contribution
+  for (const principle of PRINCIPLES) {
+    let bestSkillValue = 0;
+    for (const playerSkill of state.skills) {
+      if (playerSkill.level <= 0) continue;
+      const skillDef = SKILLS.find((s) => s.id === playerSkill.id);
+      if (!skillDef) continue;
+      let value = 0;
+      if (skillDef.primary === principle) {
+        value = playerSkill.level + 1;
+      } else if (skillDef.secondary === principle) {
+        value = playerSkill.level;
+      }
+      if (value > bestSkillValue) {
+        bestSkillValue = value;
+      }
+    }
+    totals[principle] += bestSkillValue;
   }
 
-  // Add tool or ink bonuses (use greater of the two, not both)
+  // For each principle, use the best tool or ink bonus (already one per principle)
   for (const principle of PRINCIPLES) {
     const toolValue = state.toolBonuses[principle] ?? 0;
     const inkValue = state.inkBonuses[principle] ?? 0;
     totals[principle] += Math.max(toolValue, inkValue);
   }
 
-  // Add memory bonuses
-  for (const [principle, value] of Object.entries(state.memoryBonuses)) {
-    if (value && value > 0) {
-      totals[principle as Principle] += value;
-    }
+  // For each principle, find the best single memory bonus
+  for (const principle of PRINCIPLES) {
+    const value = state.memoryBonuses[principle] ?? 0;
+    totals[principle] += value;
   }
 
   return totals;
