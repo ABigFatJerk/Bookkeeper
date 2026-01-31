@@ -36,3 +36,7 @@ Uses `useLocalStorage` hook for persistence. State shape:
 ### Deployment
 
 Configured for GitHub Pages with base path `/Bookkeeper/`.
+
+## Git Workflow
+
+- Never push to GitHub without asking the user first.
