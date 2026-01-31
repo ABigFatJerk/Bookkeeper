@@ -1,4 +1,4 @@
-import { PRINCIPLES, Principle } from '../data/principles';
+import { PRINCIPLES } from '../data/principles';
 import { SOULS, getSoulPrinciples } from '../data/souls';
 import { SKILLS } from '../data/skills';
 import { PlayerState, PrincipleTotals } from '../types';
